@@ -13,14 +13,15 @@ class GamesController < ApplicationController
 
   def score
     word = params[:word]
+    grid = params[:letters]
     solution = word.upcase.split('')
-    @letters = params[:letters].split('')
-    if (solution & @letters) != solution
-      @prompt = "Sorry, #{word} can not be built with #{@letters}!"
+    letters = grid.split('')
+    if (solution & letters) != solution
+      @prompt = "Sorry, #{word} can not be built with #{grid}!"
     elsif check(word)
       @prompt = "Congratulations, you won. Your score is #{word.length * 10} points!"
     else
-      @prompt = "Sorry, #{params[:word]} is not in the dictionary"
+      @prompt = "Sorry, #{word} is not in the dictionary"
     end
   end
 end
